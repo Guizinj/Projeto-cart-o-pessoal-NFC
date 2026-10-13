@@ -27,7 +27,7 @@ Abra http://127.0.0.1:4173. Encerre o servidor com Ctrl+C. No PowerShell, se a p
 
 O script gera index.html (inclusive conteúdo e Open Graph), assets/qr.svg e assets/contato.vcf. Não edite esses arquivos gerados diretamente. Deixe um contato opcional vazio (`''`) para ocultar o botão correspondente; e-mail e site permanecem visíveis sem link quando `mostrarEmailSemLink` e `mostrarSiteSemLink` são `true`. Preencher e-mail/site ativa os respectivos links automaticamente. Para remover endereço, deixe seus campos vazios. Telefone: código internacional com `+`; WhatsApp: somente números com código do país e DDD. Instagram, site e mapa: URLs completas.
 
-**Antes de publicar:** substitua a URL provisória `https://example.com/yago/` e confira os dados com o cliente. O QR demonstrativo aponta para example.com, e não para a prévia local. Compartilhamento e QR usam exatamente `urlPublica`.
+**URL pública configurada:** `https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/`. Compartilhamento e QR usam exatamente `urlPublica`. Após alterar dados ou endereço, execute `npm run preparar` e envie os arquivos atualizados ao GitHub Pages. Confira os dados com o cliente antes da entrega.
 
 Para uma futura versão focada no estabelecimento, os campos `marca`, `empresa`, `apresentacao` e `foto` permitem ajustar a identidade; redes, contatos e serviços devem refletir apenas informações confirmadas pelo cliente.
 

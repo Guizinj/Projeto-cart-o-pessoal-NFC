@@ -20,5 +20,5 @@ export default {
   },
   mapa: 'https://maps.app.goo.gl/X9BAyFC9jq4GSfab9',
   site: '',
-  urlPublica: 'https://example.com/yago/' // Substituir pela URL definitiva antes de publicar.
+  urlPublica: 'https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/'
 };
