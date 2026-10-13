@@ -1,0 +1,12 @@
+{
+  "name": "cartao-digital-nfc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preparar": "node scripts/preparar.mjs",
+    "preview": "node scripts/servidor.mjs",
+    "test": "node --test"
+  },
+  "devDependencies": { "qrcode": "1.5.4" }
+}

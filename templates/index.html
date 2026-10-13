@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121314">
+  {{metadados}}
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <main class="card" aria-labelledby="nome">
+    <header class="masthead"><span class="brand">{{marca}}</span><span class="tag">Cartão digital</span></header>
+    <section class="identity" aria-labelledby="nome">
+      <div class="portrait-wrap"><img class="portrait" src="{{foto}}" alt="{{fotoAlt}}" width="112" height="112" fetchpriority="high"></div>
+      <p class="eyebrow">Prazer, eu sou</p>
+      <h1 id="nome">{{nome}}</h1>
+      <p class="profession">{{profissao}}</p>
+      <p class="intro">{{apresentacao}}</p>
+    </section>
+    <a class="save" href="assets/contato.vcf" download="contato.vcf" target="_blank" rel="noopener noreferrer">{{iconeSalvar}}<span>Salvar contato</span>{{iconeSeta}}</a>
+    <p class="save-note">Meus dados, direto na sua agenda.</p>
+    <nav class="links" aria-label="Entre em contato">{{links}}</nav>
+    <section class="connect" aria-labelledby="qr-title">
+      <div><p class="eyebrow">Vamos nos conectar</p><h2 id="qr-title">Meu cartão, sempre com você.</h2><p>Aponte a câmera para abrir este perfil.</p></div>
+      <img src="assets/qr.svg" alt="QR Code para abrir o perfil de {{nome}}" width="108" height="108" loading="lazy">
+    </section>
+    <button class="share" id="compartilhar" type="button" hidden>{{iconeCompartilhar}} Compartilhar perfil</button>
+    <p id="status" class="status" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="copia-manual" class="manual" hidden><label for="link-perfil">Copie o link do perfil:</label><input id="link-perfil" type="url" readonly value="{{urlPublica}}"></div>
+    <noscript><p class="noscript">Para compartilhar, copie o endereço desta página.</p></noscript>
+    <footer>Uma boa conexão começa com uma conversa.</footer>
+  </main>
+</body>
+</html>
