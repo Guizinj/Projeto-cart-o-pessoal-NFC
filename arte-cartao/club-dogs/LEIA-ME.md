@@ -1,11 +1,7 @@
-# Club Dog's — versão do estabelecimento
+# Frente principal — Club Dog's
 
-Esta é a identidade atual: lilás e rosa da logo enviada, foco no petshop e estética animal, telefone (81) 98872-6029, Instagram @clubdog.s e Caruaru, PE. Não há nome ou retrato do proprietário na nova arte.
+Arte aprovada: frente.svg (vetorial, 90 × 50 mm) e frente.png (prévia, 1800 × 1000 px). Logo original, nome, categoria e NFC; sem cidade e sem slogan.
 
-A frente foi simplificada: logo, nome, categoria e NFC, sem cidade e sem slogan. Caruaru, PE continua no verso; o slogan permanece no bio-site.
+Os versos e as alternativas foram apagados. npm run preparar agora gera somente a frente, sem recriar as artes descartadas. Contatos, serviços e QR permanecem no bio-site.
 
-Use frente.svg e verso.svg como fontes de diagramação. A logo original está incorporada, os textos são vetoriais e o QR aponta para https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/. A apresentação cartao-preview.png e o verso.png passaram na decodificação do QR com jsQR.
-
-As medidas atuais são 90 × 50 mm, sem sangria. Confirme dimensões, sangria, fontes e acabamento com a gráfica antes de imprimir; teste também uma prova do QR. PNGs são prévias da versão entregue. npm run preparar regenera os SVGs a partir de js/perfil.js, sem atualizar os PNGs.
-
-As artes de Yago na pasta superior são versões históricas.
+Confirme medidas, sangria e fontes com a gráfica antes da impressão. O PNG é uma captura da versão aprovada e não é regenerado pelo comando preparar. biosite-mobile.png, biosite-desktop.png e qr-site-teste.png são registros de verificação do site, não faces do cartão.

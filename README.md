@@ -14,7 +14,7 @@ Abra **http://127.0.0.1:4173**. Encerre o servidor com **Ctrl+C**. Módulos Java
 
 ## Atualizar os dados
 
-Todas as informações estão em **js/perfil.js**: marca, apresentação, slogan, imagens, serviços, cidade, contatos, mensagem de agendamento e URL pública. O tipo `estabelecimento` salva a marca como nome do contato no VCF. A frente do cartão usa somente logo, marca, categoria e NFC; a cidade fica no verso e o slogan no bio-site.
+Todas as informações estão em **js/perfil.js**: marca, apresentação, slogan, imagens, serviços, cidade, contatos, mensagem de agendamento e URL pública. O tipo `estabelecimento` salva a marca como nome do contato no VCF. Foi mantida somente a frente do cartão, com logo, marca, categoria e NFC. Contatos, cidade, slogan, QR e serviços ficam no bio-site.
 
 Após editar:
 
@@ -48,15 +48,16 @@ Não publique node_modules, .qa, scripts, tests ou os arquivos internos do cart�
 
 Os novos arquivos ficam em **arte-cartao/club-dogs/**:
 
-- **frente.svg** e **verso.svg**: arte vetorial, 90 × 50 mm, com a logo original incorporada e QR gerado matematicamente.
-- **cartao-preview.png**: apresentação de frente e verso.
-- **frente.png** e **verso.png**: prévias raster de cada face, 1800 × 1000 px.
+- **frente.svg**: frente aprovada em formato vetorial, 90 × 50 mm, com a logo original incorporada.
+- **frente.png**: prévia da frente aprovada, 1800 × 1000 px.
 - **biosite-mobile.png** e **biosite-desktop.png**: capturas do novo site.
-- **qr-original.svg**: QR isolado para o endereço público.
+- **qr-site-teste.png**: registro da verificação de leitura do QR do site.
 
-`preparar` regenera os **SVGs**. Os PNGs são capturas da versão entregue e não são atualizados pelo comando; após mudar dados, use os SVGs novos. As versões antigas de Yago permanecem em arte-cartao como histórico e não são a identidade atual.
+Os versos, as apresentações com duas faces e as alternativas foram removidos a pedido do usuário. O gerador não recria essas artes.
 
-A diagramação é vetorial para manter textos e QR precisos. Antes da produção física, a gráfica deve ajustar as medidas ao cartão NFC real, definir sangria e área segura, verificar as fontes e conferir a prova. Não imprimir a apresentação com os dois lados como se fosse uma única face.
+`preparar` regenera somente **frente.svg**, além dos arquivos do site. Os PNGs são capturas da versão entregue e não são atualizados pelo comando; após mudar dados, use o SVG novo.
+
+A diagramação é vetorial para manter os textos precisos. Antes da produção física, a gráfica deve ajustar as medidas ao cartão NFC real, definir sangria e área segura, verificar as fontes e conferir a prova.
 
 ## Verificações
 
@@ -66,7 +67,7 @@ npm.cmd test
 
 Oito testes aprovados: contato do estabelecimento, consistência do telefone, vCard com caracteres especiais, preparação sincronizada, omissão/ativação de links e alternativas de compartilhamento. Layout verificado no Chrome em 320, 375, 390, 768 e 1280 px, sem rolagem horizontal, com controles de pelo menos 44 px e navegação por teclado.
 
-QRs da captura do site, do verso e da apresentação do cartão decodificados com jsQR e comparados à URL pública. Validação em aparelho físico e prova impressa ainda deve ser feita. Safari/iPhone, importação na agenda, leitor de tela e prévia real do WhatsApp não foram testados em aparelhos nesta sessão.
+O QR da captura do site foi decodificado com jsQR e comparado à URL pública. Validação em aparelho físico ainda deve ser feita. Safari/iPhone, importação na agenda, leitor de tela e prévia real do WhatsApp não foram testados em aparelhos nesta sessão.
 
 ## Imagens e identidade
 
