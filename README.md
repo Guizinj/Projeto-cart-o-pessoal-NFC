@@ -14,7 +14,7 @@ Abra **http://127.0.0.1:4173**. Encerre o servidor com **Ctrl+C**. Módulos Java
 
 ## Atualizar os dados
 
-Todas as informações estão em **js/perfil.js**: marca, apresentação, slogan, imagens, serviços, cidade, contatos, mensagem de agendamento e URL pública. O tipo `estabelecimento` salva a marca como nome do contato no VCF. `fraseCartao` controla as duas linhas da frente do cartão.
+Todas as informações estão em **js/perfil.js**: marca, apresentação, slogan, imagens, serviços, cidade, contatos, mensagem de agendamento e URL pública. O tipo `estabelecimento` salva a marca como nome do contato no VCF. A frente do cartão usa somente logo, marca, categoria e NFC; a cidade fica no verso e o slogan no bio-site.
 
 Após editar:
 
