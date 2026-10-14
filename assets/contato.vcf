@@ -1,8 +1,10 @@
 BEGIN:VCARD
 VERSION:3.0
-N:Santos;Yago;;;
-FN:Yago Santos
+N:Club Dog's;;;;
+FN:Club Dog's
 ORG:Club Dog's
-TITLE:Proprietário de petshop
-TEL;TYPE=CELL:+5581998836422
+TITLE:Petshop & estética animal
+TEL;TYPE=CELL:+5581988726029
+ADR;TYPE=WORK:;;;Caruaru;PE;;Brasil
+URL:https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/
 END:VCARD

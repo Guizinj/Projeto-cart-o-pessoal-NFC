@@ -1,67 +1,77 @@
-# Cartão de visita digital NFC
+# Club Dog's — bio-site e cartão NFC
 
-Mini-site estático em HTML, CSS e JavaScript puro, adaptado para Yago Santos, proprietário de petshop. Sem login, banco de dados ou serviços de QR Code em tempo de execução.
+Projeto 100% voltado ao estabelecimento, com a logo fornecida pelo cliente e identidade lilás/rosa. HTML, CSS e JavaScript puro, sem frameworks, login ou banco de dados. A capa é uma ilustração criada com image_gen; não representa animais atendidos nem o espaço físico do petshop.
 
-Visual inspirado na arte do cartão físico enviada pelo usuário: preto e grafite, detalhes prateados, nome em fonte serifada e curvas decorativas feitas em CSS. O QR mantém fundo branco para preservar a leitura. Os dados de contato seguem as informações fornecidas por texto, independentemente dos exemplos presentes na arte.
+## Visualizar
 
-A versão atual prioriza o contato pessoal do Yago e inclui o nome e a localização do petshop Club Dog's. O endereço escrito ainda não foi informado. E-mail e site aparecem desativados, apenas com seus rótulos; não são incluídos no contato salvo. Telefone/WhatsApp: +55 81 99883-6422; Instagram: @yago8508. Todos os links têm `target="_blank"` e `rel="noopener noreferrer"`; chamadas, e-mail e downloads seguem o comportamento do navegador e aplicativos do aparelho.
+Abra `index.html` para conferir o visual. Para testar também o compartilhamento, abra o terminal na pasta e execute:
 
-## Preparar e visualizar
-
-Com Node.js 22 ou superior instalado, na pasta do projeto:
-
-```sh
-npm ci
-npm run preparar
-npm run preview
+```powershell
+npm.cmd run preview
 ```
 
-Abra http://127.0.0.1:4173. Encerre o servidor com Ctrl+C. No PowerShell, se a política de scripts impedir `npm`, utilize `npm.cmd`. Abra pelo servidor local, pois módulos JavaScript não funcionam corretamente via `file://`.
+Abra **http://127.0.0.1:4173**. Encerre o servidor com **Ctrl+C**. Módulos JavaScript podem ser bloqueados quando a página é aberta diretamente via `file://`.
 
 ## Atualizar os dados
 
-1. Edite **js/perfil.js**. Preencha nome completo, nome próprio e sobrenome, profissão, empresa, apresentação, contatos e endereço.
-2. Substitua **assets/perfil.jpg** pela foto autorizada do cliente; se mudar o nome do arquivo, ajuste `foto` e `fotoAlt`. Prefira JPEG quadrado, pelo menos 600 × 600 px, comprimido.
-3. Defina **urlPublica** com a URL HTTPS definitiva, por exemplo `https://cliente.com/cartao/`. Para publicação numa pasta, inclua a barra final. Sem parâmetros ou fragmentos.
-4. Execute **npm run preparar** e confira a prévia.
+Todas as informações estão em **js/perfil.js**: marca, apresentação, slogan, imagens, serviços, cidade, contatos, mensagem de agendamento e URL pública. O tipo `estabelecimento` salva a marca como nome do contato no VCF. `fraseCartao` controla as duas linhas da frente do cartão.
 
-O script gera index.html (inclusive conteúdo e Open Graph), assets/qr.svg e assets/contato.vcf. Não edite esses arquivos gerados diretamente. Deixe um contato opcional vazio (`''`) para ocultar o botão correspondente; e-mail e site permanecem visíveis sem link quando `mostrarEmailSemLink` e `mostrarSiteSemLink` são `true`. Preencher e-mail/site ativa os respectivos links automaticamente. Para remover endereço, deixe seus campos vazios. Telefone: código internacional com `+`; WhatsApp: somente números com código do país e DDD. Instagram, site e mapa: URLs completas.
+Após editar:
 
-**URL pública configurada:** `https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/`. Compartilhamento e QR usam exatamente `urlPublica`. Após alterar dados ou endereço, execute `npm run preparar` e envie os arquivos atualizados ao GitHub Pages. Confira os dados com o cliente antes da entrega.
-
-Para uma futura versão focada no estabelecimento, os campos `marca`, `empresa`, `apresentacao` e `foto` permitem ajustar a identidade; redes, contatos e serviços devem refletir apenas informações confirmadas pelo cliente.
-
-## Hospedagem estática
-
-Envie somente **index.html**, **css/**, **js/** e **assets/**, mantendo a estrutura, para a raiz ou pasta pública da hospedagem. Não envie node_modules, templates, scripts, tests ou arquivos de configuração. Não há build de framework nem backend.
-
-Ative HTTPS. Garanta tipos MIME corretos: JavaScript `text/javascript`, SVG `image/svg+xml`, VCF `text/vcard; charset=utf-8`. A imagem Open Graph deve estar publicamente acessível. A prévia de compartilhamento depende do cache e comportamento do WhatsApp; após trocar dados, o serviço pode levar tempo para atualizar a imagem.
-
-No cartão NFC grave somente a URL HTTPS definitiva. Leia o QR e teste o endereço em outro aparelho antes de entregar. Mantenha essa URL estável ao atualizar o cliente.
-
-O perfil, links, QR e download do contato funcionam sem JavaScript. Compartilhar requer JavaScript: tenta compartilhamento nativo, depois cópia e, por último, mostra o link selecionável. Cancelamento voluntário não apresenta erro.
-
-## Verificação
-
-```sh
-npm test
+```powershell
+npm.cmd run preparar
 ```
 
-Os testes cobrem geração sincronizada, omissão de links, URLs inseguras, vCard com caracteres especiais e dobramento UTF-8, compartilhamento nativo, cancelamento, cópia e falha de clipboard.
+O comando atualiza a página, metadados, QR, contato `.vcf` e os cartões SVG. Os dados confirmados são:
 
-Validação realizada nesta versão: **7 testes automatizados aprovados** e verificações no Chrome local em 320, 375, 390, 768 e 1280 px, sem rolagem horizontal e com áreas de toque de pelo menos 44 px. Também foram conferidos carregamento das imagens, foco por teclado, download do VCF, fallback com link selecionável, cópia, cancelamento e acesso ao perfil sem JavaScript. Não foram realizados testes em aparelhos físicos ou avaliação completa com leitor de tela.
+- **Club Dog's — Petshop & estética animal**, Caruaru, PE.
+- **(81) 98872-6029**: WhatsApp e ligação, com código internacional `+5581988726029`.
+- **@clubdog.s**: https://www.instagram.com/clubdog.s/.
+- Serviços da captura enviada: banho, tosa, hidratação, higiene bucal e carding.
+- Site: https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/.
 
-Checklist de entrega em **Safari/iPhone e Chrome/Android**, sobre HTTPS:
+O link de mapa enviado anteriormente foi mantido. Confirme o destino com o cliente antes da entrega; o endereço completo ainda não foi informado. Horários, preços, transporte e campanhas não foram incluídos porque não foram confirmados. A consulta externa ao Instagram não foi possível; logo e informações vieram dos anexos enviados pelo usuário.
 
-- Testar WhatsApp, Instagram, ligação, e-mail, mapa e site com os dados reais.
-- Tocar em Salvar contato e importar; conferir nome, empresa, profissão, telefone, e-mail, endereço e site. Conforme o navegador, o VCF pode abrir no aplicativo de contatos ou ser baixado para abertura manual.
-- Compartilhar com WhatsApp, conferir URL e prévia; cancelar e tentar novamente.
-- Ler QR e NFC com outro aparelho, confirmando a mesma URL.
-- Navegar por teclado e leitor de tela; conferir foco, rótulos e anúncio das mensagens.
-- Conferir larguras de 320, 375, 390, 768 e 1280 px, sem rolagem horizontal.
+E-mail e site comercial próprio ficam vazios e visíveis como opções desativadas, conforme a preferência anterior. Para ocultá-los, use `mostrarEmailSemLink: false` e `mostrarSiteSemLink: false`. Preencher seus dados ativa os links. Todos os links ativos usam `target="_blank"` e `rel="noopener noreferrer"`. Aplicativos de telefone, contatos e WhatsApp seguem o comportamento do aparelho.
 
-Testes em aparelhos físicos, importação na agenda e prévia real no WhatsApp precisam de verificação manual após publicar. A primeira versão é entregue localmente; nenhum site foi publicado e nenhum NFC foi gravado.
+O botão Salvar contato abre o `.vcf` sem forçar download. Em alguns aparelhos é necessário baixar e abrir/importar pelo aplicativo Contatos. Compartilhamento usa a API nativa, com cópia e link selecionável como alternativas. Nenhum contato é salvo automaticamente sem ação do visitante.
 
-## Foto do perfil
+## Publicar no GitHub Pages
 
-Foto fornecida pelo usuário: `5078158267967540495.jpg`, copiada para `assets/perfil.jpg`. A mesma foto é usada no perfil e nos metadados de compartilhamento. O enquadramento circular é feito por CSS, preservando o arquivo original.
+Envie **index.html**, **css/**, **js/** e **assets/** atualizados. Preserve os caminhos relativos. A hospedagem serve somente arquivos estáticos; Node.js é utilizado apenas no computador para preparação e prévia.
+
+O QR e o compartilhamento continuam apontando para a URL pública existente. A versão local não altera automaticamente o site publicado: é necessário enviar os arquivos para o GitHub e aguardar a atualização do Pages.
+
+Não publique node_modules, .qa, scripts, tests ou os arquivos internos do cartão. Use HTTPS e MIME `text/vcard` para o contato quando a hospedagem permitir configurar cabeçalhos. No NFC, grave somente a URL pública.
+
+## Cartão do estabelecimento
+
+Os novos arquivos ficam em **arte-cartao/club-dogs/**:
+
+- **frente.svg** e **verso.svg**: arte vetorial, 90 × 50 mm, com a logo original incorporada e QR gerado matematicamente.
+- **cartao-preview.png**: apresentação de frente e verso.
+- **frente.png** e **verso.png**: prévias raster de cada face, 1800 × 1000 px.
+- **biosite-mobile.png** e **biosite-desktop.png**: capturas do novo site.
+- **qr-original.svg**: QR isolado para o endereço público.
+
+`preparar` regenera os **SVGs**. Os PNGs são capturas da versão entregue e não são atualizados pelo comando; após mudar dados, use os SVGs novos. As versões antigas de Yago permanecem em arte-cartao como histórico e não são a identidade atual.
+
+A diagramação é vetorial para manter textos e QR precisos. Antes da produção física, a gráfica deve ajustar as medidas ao cartão NFC real, definir sangria e área segura, verificar as fontes e conferir a prova. Não imprimir a apresentação com os dois lados como se fosse uma única face.
+
+## Verificações
+
+```powershell
+npm.cmd test
+```
+
+Oito testes aprovados: contato do estabelecimento, consistência do telefone, vCard com caracteres especiais, preparação sincronizada, omissão/ativação de links e alternativas de compartilhamento. Layout verificado no Chrome em 320, 375, 390, 768 e 1280 px, sem rolagem horizontal, com controles de pelo menos 44 px e navegação por teclado.
+
+QRs da captura do site, do verso e da apresentação do cartão decodificados com jsQR e comparados à URL pública. Validação em aparelho físico e prova impressa ainda deve ser feita. Safari/iPhone, importação na agenda, leitor de tela e prévia real do WhatsApp não foram testados em aparelhos nesta sessão.
+
+## Imagens e identidade
+
+Logo original: `5078158267967540533.jpg`, copiada para **assets/logo-club-dogs.jpg**, sem redesenhar a marca; recorte circular feito por CSS e máscara SVG. Referência de conteúdo: captura `5078158267967540534.jpg` fornecida pelo usuário.
+
+Capa: **assets/pets-club-dogs.jpg**, ilustração criada com a ferramenta integrada image_gen e comprimida para 960 × 640 px. Briefing: cão e gato amigáveis em cenário lilás/rosa, estética editorial 3D, luz suave, espaço livre à esquerda e nenhum texto ou logo. A logo do estabelecimento não foi recriada por IA.
+
+Para uma instalação nova: Node.js 22+ e `npm.cmd ci` antes de usar os comandos. A única dependência de preparação é qrcode; não há bibliotecas externas carregadas pelo site.

@@ -24,14 +24,14 @@ test('ações vazias são omitidas e URLs inseguras são rejeitadas', () => {
   assert.equal((gerarLinks(perfil).match(/aria-disabled="true"/g)||[]).length,2);
   assert.ok(!gerarLinks(perfil).includes('mailto:'));
   assert.ok(!gerarVcard(perfil).includes('EMAIL;'));
-  assert.ok(!gerarVcard(perfil).includes('URL:'));
+  assert.ok(gerarVcard(perfil).includes(`URL:${perfil.urlPublica}`));
 });
 test('preparação reflete alteração do perfil no HTML, QR e vCard', async () => {
   const destino = await mkdtemp(join(tmpdir(),'cartao-nfc-'));
   try {
     await mkdir(join(destino,'assets'));
     await copyFile(new URL('../assets/perfil.jpg',import.meta.url),join(destino,'assets/perfil.jpg'));
-    const p = {...perfil,nome:'André <Costa>',nomeProprio:'André',urlPublica:'https://cliente.example/cartao/'};
+    const p = {...perfil,nome:'André <Costa>',nomeProprio:'André',foto:'assets/perfil.jpg',capa:'assets/perfil.jpg',urlPublica:'https://cliente.example/cartao/'};
     await preparar(p,destino);
     const pagina = await readFile(join(destino,'index.html'),'utf8');
     assert.ok(pagina.includes('André &lt;Costa&gt;'));
@@ -43,6 +43,15 @@ test('preparação reflete alteração do perfil no HTML, QR e vCard', async () 
     assert.ok((await readFile(join(destino,'assets/contato.vcf'),'utf8')).includes('FN:André <Costa>'));
     await assert.rejects(preparar({...p,urlPublica:'http://cliente.example/'},destino));
   } finally { await rm(destino,{recursive:true,force:true}); }
+});
+test('contato do estabelecimento usa marca e o novo número consistente', () => {
+  assert.equal(perfil.telefone, `+55${perfil.telefoneExibicao.replace(/\D/g,'')}`);
+  assert.equal(perfil.whatsapp, perfil.telefone.replace(/\D/g,''));
+  const vcf=gerarVcard(perfil);
+  assert.ok(vcf.includes("FN:Club Dog's\r\n"));
+  assert.ok(vcf.includes("N:Club Dog's;;;;\r\n"));
+  assert.ok(vcf.includes('TEL;TYPE=CELL:+5581988726029'));
+  assert.ok(!vcf.includes('Yago'));
 });
 test('compartilhamento nativo recebe a URL pública', async () => {
   let dados, mensagem;
