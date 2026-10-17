@@ -1,9 +1,6 @@
 // Edite aqui e execute npm run preparar antes de publicar.
 export default {
-  tipo: 'estabelecimento',
   nome: "Club Dog's",
-  nomeProprio: '',
-  sobrenome: '',
   profissao: 'Petshop & estética animal',
   marca: "Club Dog's",
   empresa: "Club Dog's",
@@ -22,21 +19,26 @@ export default {
   mensagemWhatsApp: "Olá, Club Dog's! Gostaria de agendar um horário para o meu pet.",
   instagram: 'https://www.instagram.com/clubdog.s/',
   instagramExibicao: '@clubdog.s',
-  email: '',
-  mostrarEmailSemLink: true,
-  mostrarSiteSemLink: true,
   endereco: {
     rua: '', cidade: 'Caruaru', estado: 'PE', cep: '', pais: 'Brasil'
   },
   mapa: 'https://maps.app.goo.gl/X9BAyFC9jq4GSfab9',
-  site: '',
   urlPublica: 'https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/',
-  // Serviços informados na captura do Instagram enviada pelo cliente.
+  // Demonstração autorizada: substitua nomes e valores antes de publicar.
+  // preco: número em reais (sem R$); null exibe "Sob consulta".
+  servicosDemonstrativos: true,
   servicos: [
-    { icone: 'banho', nome: 'Banho', descricao: 'Limpeza e cuidado para renovar a rotina do seu pet.' },
-    { icone: 'tosa', nome: 'Tosa', descricao: 'Um novo visual, com conforto para o dia a dia.' },
-    { icone: 'gota', nome: 'Hidratação', descricao: 'Um cuidado extra com a maciez e a aparência da pelagem.' },
-    { icone: 'sorriso', nome: 'Higiene bucal', descricao: 'Mais um carinho na rotina de higiene do seu pet.' },
-    { icone: 'escova', nome: 'Carding', descricao: 'Remoção de pelos mortos e atenção especial à pelagem.' }
+    { nome: 'Banho · porte pequeno', preco: 45, aPartirDe: true },
+    { nome: 'Banho · porte médio', preco: 60, aPartirDe: true },
+    { nome: 'Banho · porte grande', preco: 80, aPartirDe: true },
+    { nome: 'Tosa higiênica', preco: 35, aPartirDe: true },
+    { nome: 'Tosa na máquina', preco: 65, aPartirDe: true },
+    { nome: 'Tosa na tesoura', preco: 95, aPartirDe: true },
+    { nome: 'Hidratação', preco: 30, aPartirDe: true },
+    { nome: 'Higiene bucal', preco: 20 },
+    { nome: 'Carding', preco: 45, aPartirDe: true },
+    { nome: 'Desembolo', preco: 35, aPartirDe: true },
+    { nome: 'Corte de unhas', preco: 15 },
+    { nome: 'Limpeza de ouvidos', preco: 20 }
   ]
 };

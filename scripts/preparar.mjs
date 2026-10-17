@@ -20,17 +20,15 @@ export function dobrarLinha(linha) {
   return saida;
 }
 export function gerarVcard(p) {
-  const nomeEstruturado = p.tipo === 'estabelecimento' ? `${textoVcf(p.nome)};;;;` : `${textoVcf(p.sobrenome)};${textoVcf(p.nomeProprio)};;;`;
-  const linhas = ['BEGIN:VCARD', 'VERSION:3.0', `N:${nomeEstruturado}`, `FN:${textoVcf(p.nome)}`];
+  const linhas = ['BEGIN:VCARD', 'VERSION:3.0', `N:${textoVcf(p.nome)};;;;`, `FN:${textoVcf(p.nome)}`];
   if (p.empresa) linhas.push(`ORG:${textoVcf(p.empresa)}`);
   if (p.profissao) linhas.push(`TITLE:${textoVcf(p.profissao)}`);
   if (p.telefone) linhas.push(`TEL;TYPE=CELL:${textoVcf(p.telefone)}`);
-  if (p.email) linhas.push(`EMAIL;TYPE=INTERNET:${textoVcf(p.email)}`);
   if (p.endereco && Object.values(p.endereco).some(Boolean)) {
     const a = p.endereco;
     linhas.push(`ADR;TYPE=WORK:;;${[a.rua,a.cidade,a.estado,a.cep,a.pais].map(textoVcf).join(';')}`);
   }
-  if (p.site || p.urlPublica) linhas.push(`URL:${textoVcf(p.site || p.urlPublica)}`);
+  if (p.urlPublica) linhas.push(`URL:${textoVcf(p.urlPublica)}`);
   linhas.push('END:VCARD');
   return linhas.map(dobrarLinha).join('\r\n') + '\r\n';
 }
@@ -41,16 +39,9 @@ const desenhos = {
   whatsapp: '<path d="M21 11.5a9 9 0 0 1-13.6 7.8L3 21l1.6-4.4A9 9 0 1 1 21 11.5Z"/><path d="M8 7c-2 4 3 9 7 8l1-2-3-1-1 1-2-2 1-1-1-3Z"/>',
   instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
   telefone: '<path d="m8 3 3 5-3 2a14 14 0 0 0 6 6l2-3 5 3-1 4C10 22 2 14 3 4Z"/>',
-  email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/>',
   mapa: '<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/>',
-  site: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
   pata: '<ellipse cx="12" cy="16" rx="6" ry="4"/><ellipse cx="5" cy="8" rx="2" ry="3" transform="rotate(-20 5 8)"/><ellipse cx="10" cy="5" rx="2" ry="3"/><ellipse cx="16" cy="6" rx="2" ry="3"/><ellipse cx="20" cy="11" rx="2" ry="3" transform="rotate(25 20 11)"/>',
   coracao: '<path d="M20 5a5 5 0 0 0-8 1 5 5 0 0 0-8-1c-4 4 2 9 8 14 6-5 12-10 8-14Z"/>',
-  banho: '<path d="M3 12h18l-2 7H5Zm3 7v2m12-2v2M6 12V6a3 3 0 0 1 6 0M10 7h4m3 0h.01m2 3h.01m-4 0h.01"/>',
-  tosa: '<circle cx="6" cy="7" r="3"/><circle cx="6" cy="17" r="3"/><path d="m9 8 11 11M9 16 20 5"/>',
-  gota: '<path d="M12 3S5 11 5 15a7 7 0 0 0 14 0c0-4-7-12-7-12Z"/><path d="M8 15a4 4 0 0 0 4 4"/>',
-  sorriso: '<circle cx="12" cy="12" r="9"/><path d="M7 13a5 5 0 0 0 10 0M8 8h.01M16 8h.01"/>',
-  escova: '<rect x="6" y="4" width="12" height="9" rx="3"/><path d="M9 4V2m3 2V2m3 2V2M10 13v7a2 2 0 0 0 4 0v-7M9 8h6"/>'
 };
 const icone = nome => `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${desenhos[nome]}</svg>`;
 function urlWeb(valor, campo) {
@@ -63,20 +54,38 @@ export function gerarLinks(p) {
     ['whatsapp', 'WhatsApp', p.whatsapp ? `https://wa.me/${p.whatsapp.replace(/\D/g, '')}` : ''],
     ['instagram', 'Instagram', p.instagram ? urlWeb(p.instagram, 'instagram') : ''],
     ['telefone', 'Ligar', p.telefone ? `tel:${p.telefone.replace(/[^+\d]/g, '')}` : ''],
-    ['email', 'E-mail', p.email ? `mailto:${encodeURIComponent(p.email)}` : ''],
-    ['mapa', 'Localização', p.mapa ? urlWeb(p.mapa, 'mapa') : ''],
-    ['site', 'Site', p.site ? urlWeb(p.site, 'site') : '']
+    ['mapa', 'Localização', p.mapa ? urlWeb(p.mapa, 'mapa') : '']
   ];
-  return acoes.map(([tipo, rotulo, url]) => {
-    if (url) return `<a class="contact-link" href="${html(url)}" target="_blank" rel="noopener noreferrer">${icone(tipo)}<span>${rotulo}</span></a>`;
-    if ((tipo === 'email' && p.mostrarEmailSemLink) || (tipo === 'site' && p.mostrarSiteSemLink)) {
-      return `<span class="contact-link contact-unavailable" role="link" aria-disabled="true" aria-label="${rotulo}: não informado">${icone(tipo)}<span>${rotulo}</span></span>`;
-    }
-    return '';
-  }).filter(Boolean).join('\n');
+  return acoes.filter(([, , url]) => url).map(([tipo, rotulo, url]) =>
+    `<a class="contact-link" href="${html(url)}" target="_blank" rel="noopener noreferrer">${icone(tipo)}<span>${rotulo}</span></a>`
+  ).join('\n');
 }
+const moeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+
+export function formatarPrecoServico(servico) {
+  if (servico.preco == null) return 'Sob consulta';
+  if (typeof servico.preco !== 'number' || !Number.isFinite(servico.preco) || servico.preco < 0) {
+    throw new Error(`Preço inválido para ${servico.nome}: use um número positivo ou null.`);
+  }
+  const valor = moeda.format(servico.preco).replace(/\u00a0/g, ' ');
+  return servico.aPartirDe ? `A partir de ${valor}` : valor;
+}
+
 export function gerarServicos(p) {
-  return (p.servicos || []).map(s => `<article class="service"><span class="service-icon">${icone(desenhos[s.icone] ? s.icone : 'pata')}</span><div><h3>${html(s.nome)}</h3><p>${html(s.descricao)}</p></div></article>`).join('\n');
+  const servicos = p.servicos || [];
+  const numero = String(p.whatsapp || '').replace(/\D/g, '');
+  if (servicos.length && !numero) throw new Error('Informe o WhatsApp para os serviços.');
+  return servicos.map(s => {
+    if (typeof s.nome !== 'string' || !s.nome.trim()) throw new Error('Informe o nome de cada serviço.');
+    const preco = formatarPrecoServico(s);
+    const prefixo = s.preco != null && s.aPartirDe ? '<span class="service-price-prefix">A partir de</span>' : '';
+    const valor = prefixo ? preco.replace('A partir de ', '') : preco;
+    const demonstracao = p.servicosDemonstrativos ? ' (valor demonstrativo)' : '';
+    const mensagem = `Olá, ${p.nome}! Gostaria de agendar ${s.nome}. Valor no site: ${preco}${demonstracao}. Podemos confirmar os detalhes e a disponibilidade?`;
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    const rotulo = `${s.nome} — ${preco}. Agendar pelo WhatsApp (abre em nova aba)`;
+    return `<li class="service-item"><a class="service" href="${html(url)}" target="_blank" rel="noopener noreferrer" aria-label="${html(rotulo)}"><div class="service-top"><h3>${html(s.nome)}</h3><span class="service-arrow">${icone('seta')}</span></div><div class="service-price">${prefixo}<strong>${html(valor)}</strong></div></a></li>`;
+  }).join('\n');
 }
 export async function preparar(p = perfil, destino = raiz) {
   const url = new URL(p.urlPublica);
@@ -104,6 +113,7 @@ export async function preparar(p = perfil, destino = raiz) {
   const campos = {
     ...Object.fromEntries(Object.entries(p).map(([k,v]) => [k,html(v)])),
     marca:html(p.marca || p.empresa || p.nome), metadados, links:gerarLinks(p), servicos:gerarServicos(p),
+    avisoServicos:p.servicosDemonstrativos ? '<p class="service-demo">Catálogo demonstrativo · serviços e preços fictícios.</p>' : '',
     urlWhatsapp:html(`https://wa.me/${p.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(p.mensagemWhatsApp || '')}`),
     iconeSalvar:icone('salvar'), iconeSeta:icone('seta'), iconeCompartilhar:icone('compartilhar'),
     iconePata:icone('pata'), iconeCoracao:icone('coracao'), iconeMapa:icone('mapa'), iconeWhatsapp:icone('whatsapp'), iconeInstagram:icone('instagram')

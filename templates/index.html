@@ -27,8 +27,11 @@
       </div>
     </section>
     <section class="services section" aria-labelledby="servicos-title">
-      <div class="section-heading"><div><p class="eyebrow">Cuidado da cabeça às patinhas</p><h2 id="servicos-title">Um carinho para cada necessidade.</h2></div><span class="heading-icon" aria-hidden="true">{{iconePata}}</span></div>
-      <div class="service-list">{{servicos}}</div><p class="service-note">Conte pra gente sobre seu pet. Orientamos você sobre os serviços e a disponibilidade.</p>
+      <div class="section-heading"><div><p class="eyebrow">Cuidado da cabeça às patinhas</p><h2 id="servicos-title">Serviços &amp; valores.</h2></div><span class="heading-icon" aria-hidden="true">{{iconePata}}</span></div>
+      <p class="service-intro" id="servicos-instrucao">Escolha um serviço para conversar e agendar pelo WhatsApp.</p>
+      {{avisoServicos}}
+      <ul class="service-list" aria-label="Catálogo de serviços" aria-describedby="servicos-instrucao">{{servicos}}</ul>
+      <p class="service-note">Confirme o valor final e a disponibilidade com nossa equipe, conforme o porte e a pelagem do seu pet.</p>
     </section>
     <section class="social-banner" aria-labelledby="instagram-title">
       <span class="social-icon">{{iconeInstagram}}</span><div><p class="eyebrow">Um pouquinho do nosso dia a dia</p><h2 id="instagram-title">O clube também está no Instagram.</h2><p>Cuidados, novidades e muita fofura.</p></div>

@@ -19,9 +19,10 @@ test('vCard preserva caracteres, estrutura e limite de octetos', () => {
 });
 test('ações vazias são omitidas e URLs inseguras são rejeitadas', () => {
   assert.equal(gerarLinks({}), '');
-  assert.throws(() => gerarLinks({site:'javascript:alert(1)'}));
+  assert.throws(() => gerarLinks({instagram:'javascript:alert(1)'}));
   assert.equal((gerarLinks(perfil).match(/<a class="contact-link"/g)||[]).length,4);
-  assert.equal((gerarLinks(perfil).match(/aria-disabled="true"/g)||[]).length,2);
+  assert.equal((gerarLinks(perfil).match(/aria-disabled="true"/g)||[]).length,0);
+  assert.deepEqual([...gerarLinks(perfil).matchAll(/<span>([^<]+)<\/span>/g)].map(([,rotulo])=>rotulo), ['WhatsApp','Instagram','Ligar','Localização']);
   assert.ok(!gerarLinks(perfil).includes('mailto:'));
   assert.ok(!gerarVcard(perfil).includes('EMAIL;'));
   assert.ok(gerarVcard(perfil).includes(`URL:${perfil.urlPublica}`));
@@ -30,12 +31,12 @@ test('preparação reflete alteração do perfil no HTML, QR e vCard', async () 
   const destino = await mkdtemp(join(tmpdir(),'cartao-nfc-'));
   try {
     await mkdir(join(destino,'assets'));
-    await copyFile(new URL('../assets/perfil.jpg',import.meta.url),join(destino,'assets/perfil.jpg'));
-    const p = {...perfil,nome:'André <Costa>',nomeProprio:'André',foto:'assets/perfil.jpg',capa:'assets/perfil.jpg',urlPublica:'https://cliente.example/cartao/'};
+    await copyFile(new URL('../assets/logo-club-dogs.jpg',import.meta.url),join(destino,'assets/logo-club-dogs.jpg'));
+    const p = {...perfil,nome:'André <Costa>',capa:'assets/logo-club-dogs.jpg',urlPublica:'https://cliente.example/cartao/'};
     await preparar(p,destino);
     const pagina = await readFile(join(destino,'index.html'),'utf8');
     assert.ok(pagina.includes('André &lt;Costa&gt;'));
-    assert.ok(pagina.includes('https://cliente.example/cartao/assets/perfil.jpg'));
+    assert.ok(pagina.includes('https://cliente.example/cartao/assets/logo-club-dogs.jpg'));
     assert.ok(pagina.includes('href="https://cliente.example/cartao/"'));
     assert.ok(!pagina.includes('{{'));
     const esperado = await QRCode.toString(p.urlPublica,{type:'svg',errorCorrectionLevel:'M',margin:4,color:{dark:'#182d28',light:'#ffffff'}});

@@ -46,13 +46,23 @@ h2 { font-size: 23px; font-weight: 800; line-height: 1.3; letter-spacing: -.04em
 .section-heading h2 { max-width: 380px; }
 .heading-icon { color: #b4a9e2; transform: rotate(15deg); }
 .heading-icon svg { width: 38px; height: 38px; stroke-width: 1.3; }
-.service-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
-.service { background: #fff; padding: 18px; border: 1px solid var(--line); border-radius: 18px; display: flex; flex-direction: column; gap: 10px; }
-.service:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 16px; }
-.service-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 11px; background: #eeebff; color: var(--purple); }
-.service:nth-child(even) .service-icon { background: #fce9f2; color: #a34676; }
-.service h3 { font-size: 14px; margin: 0 0 6px; letter-spacing: -.025em; }
-.service p { color: var(--muted); font-size: 11px; line-height: 1.7; margin: 0; }
+.services .section-heading { margin-bottom: 10px; }
+.service-intro { margin: 0 0 18px; color: var(--muted); font-size: 12px; line-height: 1.7; max-width: 380px; }
+.service-demo { margin: -5px 0 16px; color: #87536e; font-size: 10px; line-height: 1.6; }
+.service-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; padding: 0; margin: 0; list-style: none; }
+.service-item { min-width: 0; }
+.service { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; height: 100%; min-height: 114px; background: #fff; padding: 17px; border: 1px solid var(--line); border-radius: 16px; }
+.service-top { display: grid; grid-template-columns: minmax(0,1fr) 26px; align-items: start; gap: 9px; }
+.service h3 { font-size: 13px; font-weight: 700; line-height: 1.5; margin: 0; letter-spacing: -.02em; overflow-wrap: anywhere; }
+.service-arrow { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #f0edfb; color: var(--purple); }
+.service-arrow svg { width: 15px; height: 15px; }
+.service-item:nth-child(even) .service-arrow { background: #fbeaf3; color: #a34676; }
+.service-price { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.service-price-prefix { font-size: 9px; line-height: 1.4; color: var(--muted); }
+.service-price strong { font-size: 17px; line-height: 1.3; font-weight: 700; color: var(--purple); white-space: nowrap; }
+.service:hover { border-color: #b2a8d7; background: #fbfaff; box-shadow: 0 5px 16px #5756ad0a; }
+.service:hover .service-arrow { background: var(--purple); color: #fff; }
+.service:focus-visible { outline-offset: 3px; }
 .service-note { font-size: 11px; line-height: 1.7; color: var(--muted); margin: 15px 4px 0; }
 .social-banner { background: #f8e4f0; border: 1px solid #f0d5e6; border-radius: 22px; padding: 23px; display: grid; grid-template-columns: 35px 1fr; gap: 12px; }
 .social-icon { color: #a34676; }
@@ -67,8 +77,6 @@ h2 { font-size: 23px; font-weight: 800; line-height: 1.3; letter-spacing: -.04em
 .contact-link svg { width: 20px; height: 20px; color: var(--purple); }
 .contact-link span { overflow-wrap: anywhere; }
 .contact-link:hover { border-color: #a9a0d1; background: #f8f6ff; }
-.contact-unavailable, .contact-unavailable:hover { color: #757383; background: #f1eff5; border-color: #e8e5ee; cursor: default; }
-.contact-unavailable svg { color: #757383; }
 .location-note { display: flex; gap: 9px; color: var(--muted); font-size: 10px; line-height: 1.8; margin: 17px 2px 0; }
 .location-note svg { width: 17px; height: 17px; margin-top: 2px; color: var(--purple); }
 .location-note strong { color: var(--ink); font-size: 11px; }
@@ -135,5 +143,14 @@ footer p { font-size: 10px; margin: 7px 0 0; }
   .qr-wrap, .qr-wrap img { width: 88px; }
   .qr-wrap img { height: 88px; }
   .keep-card h2 { font-size: 16px; }
+}
+@media(max-width:359px) {
+  .service-list { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  .service { flex-direction: row; align-items: center; gap: 12px; min-height: 78px; padding: 14px; }
+  .service-top { display: contents; }
+  .service h3 { flex: 1; min-width: 0; order: 1; }
+  .service-price { align-items: flex-end; flex-shrink: 0; order: 2; }
+  .service-price strong { font-size: 15px; }
+  .service-arrow { flex-shrink: 0; order: 3; }
 }
 @media(prefers-reduced-motion:no-preference) { a, button { transition: background-color .18s, border-color .18s, box-shadow .18s; } }
