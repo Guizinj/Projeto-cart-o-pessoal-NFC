@@ -4,10 +4,10 @@ Site estático, sem instalação, Node.js, npm ou preparação. Abra **index.htm
 
 ## Editar
 
-- **index.html**: textos, contatos, links, serviços, preços e metadados de compartilhamento. Tudo já está pronto para exibição.
+- **index.html**: textos, contatos, links, serviços, preços, horários e metadados de compartilhamento. Tudo já está pronto para exibição.
 - **css/style.css**: aparência e responsividade.
 - **js/app.js**: compartilhamento e mensagens de agendamento. Não precisa editar ao trocar nomes ou preços.
-- **assets/**: logo, ilustração, QR e contato da agenda.
+- **assets/**: logo, ilustração da capa, fotos reais, QR e contato da agenda.
 - **arte-cartao/club-dogs/**: frente aprovada em SVG e PNG.
 
 Para mudar um serviço, altere seu título `<h3>` e o preço em `<strong>` no HTML. Mantenha ou retire o trecho `service-price-prefix` com “A partir de”, conforme necessário. Duplique ou remova um bloco `<li class="service-item">` para adicionar ou excluir opções. O JavaScript lê os dados visíveis e monta a mensagem do WhatsApp automaticamente.
@@ -20,4 +20,4 @@ Se mudar a URL pública, atualize a URL canônica e os metadados no HTML, o cont
 
 Alguns celulares baixam o VCF antes de abrir a importação na agenda. Compartilhamento nativo e cópia dependem do navegador; se indisponíveis, o site mostra um link selecionável. Teste em Android/iPhone antes da entrega.
 
-A logo foi fornecida pelo cliente. A capa é uma ilustração criada com image_gen, não uma foto do estabelecimento. A frente do cartão é de 90 × 50 mm, sem sangria; confirme a medida com a gráfica antes de imprimir.
+A logo e as duas fotos da seção “Quem passa por aqui” foram fornecidas pelo cliente. A capa é uma ilustração criada com image_gen, não uma foto do estabelecimento. Para trocar as fotos, substitua os arquivos ou atualize os caminhos, dimensões e textos alternativos no HTML. Os horários ficam na seção “Horários de funcionamento”, também no HTML. A frente do cartão é de 90 × 50 mm, sem sangria; confirme a medida com a gráfica antes de imprimir.

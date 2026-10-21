@@ -64,6 +64,11 @@ h2 { font-size: 23px; font-weight: 800; line-height: 1.3; letter-spacing: -.04em
 .service:hover .service-arrow { background: var(--purple); color: #fff; }
 .service:focus-visible { outline-offset: 3px; }
 .service-note { font-size: 11px; line-height: 1.7; color: var(--muted); margin: 15px 4px 0; }
+.moments { padding-top: 4px; }
+.photo-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.pet-photo { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.pet-photo img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+.pet-photo figcaption { padding: 12px 13px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .social-banner { background: #f8e4f0; border: 1px solid #f0d5e6; border-radius: 22px; padding: 23px; display: grid; grid-template-columns: 35px 1fr; gap: 12px; }
 .social-icon { color: #a34676; }
 .social-icon svg { width: 28px; height: 28px; }
@@ -80,6 +85,17 @@ h2 { font-size: 23px; font-weight: 800; line-height: 1.3; letter-spacing: -.04em
 .location-note { display: flex; gap: 9px; color: var(--muted); font-size: 10px; line-height: 1.8; margin: 17px 2px 0; }
 .location-note svg { width: 17px; height: 17px; margin-top: 2px; color: var(--purple); }
 .location-note strong { color: var(--ink); font-size: 11px; }
+.hours { margin: 0 4px 26px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
+.hours-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.hours-icon { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border-radius: 11px; background: var(--soft); color: var(--purple); }
+.hours-icon svg { width: 19px; height: 19px; }
+.hours-heading h2 { font-size: 16px; letter-spacing: -.025em; }
+.hours-list { margin: 0; font-size: 12px; line-height: 1.6; }
+.hours-list > div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); }
+.hours-list > div:last-child { padding-bottom: 0; }
+.hours-list dt { color: var(--muted); }
+.hours-list dd { margin: 0; font-weight: 700; text-align: right; white-space: nowrap; }
+.hours-closed dd { color: var(--muted); font-weight: 400; }
 .keep-card { display: flex; align-items: center; gap: 20px; background: #eeebfc; border: 1px solid #e2dcf4; padding: 24px; border-radius: 22px; }
 .keep-card > div:first-child { flex: 1; min-width: 0; }
 .keep-card h2 { font-size: 20px; }
@@ -123,6 +139,10 @@ footer p { font-size: 10px; margin: 7px 0 0; }
   h2 { font-size: 21px; }
   .service { padding: 15px; }
   .social-banner { padding: 20px; }
+  .moments { padding-top: 4px; }
+  .photo-grid { gap: 10px; }
+  .pet-photo figcaption { padding: 10px; font-size: 10px; }
+  .hours { padding: 17px; }
   .keep-card { padding: 20px; gap: 12px; }
   .keep-card h2 { font-size: 18px; }
   .keep-card .eyebrow { font-size: 8px; }
