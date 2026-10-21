@@ -1,63 +1,23 @@
-# Club Dog's — bio-site e cartão NFC
+# Club Dog's
 
-Site estático em HTML, CSS e JavaScript puro. Sem frameworks, login ou banco de dados. A seção de contatos contém somente WhatsApp, Instagram, ligação e localização; todos os links abrem em nova aba.
+Site estático, sem instalação, Node.js, npm ou preparação. Abra **index.html** no navegador. Para publicar, envie index.html, css/, js/ e assets/ ao GitHub Pages ou outra hospedagem estática com HTTPS.
 
-## Visualizar e atualizar
+## Editar
 
-Abra `index.html` para conferir o visual. Para testar também o compartilhamento, execute na pasta do projeto:
+- **index.html**: textos, contatos, links, serviços, preços e metadados de compartilhamento. Tudo já está pronto para exibição.
+- **css/style.css**: aparência e responsividade.
+- **js/app.js**: compartilhamento e mensagens de agendamento. Não precisa editar ao trocar nomes ou preços.
+- **assets/**: logo, ilustração, QR e contato da agenda.
+- **arte-cartao/club-dogs/**: frente aprovada em SVG e PNG.
 
-```powershell
-npm.cmd run preview
-```
+Para mudar um serviço, altere seu título `<h3>` e o preço em `<strong>` no HTML. Mantenha ou retire o trecho `service-price-prefix` com “A partir de”, conforme necessário. Duplique ou remova um bloco `<li class="service-item">` para adicionar ou excluir opções. O JavaScript lê os dados visíveis e monta a mensagem do WhatsApp automaticamente.
 
-Acesse **http://127.0.0.1:4173**. Deixe o terminal aberto e encerre com **Ctrl+C**.
+Os serviços e preços ainda são fictícios. Após substituí-los pelos reais, remova o parágrafo `class="service-demo"`; isso retira a indicação de demonstração do site e das mensagens.
 
-Edite os dados em **js/perfil.js** e depois execute:
+Ao mudar o telefone, atualize os links de WhatsApp/ligação, o número visível e **assets/contato.vcf**. O link principal de agendamento define o número usado pelos serviços. Sem JavaScript, os links de serviços abrem a conversa sem mensagem preenchida.
 
-```powershell
-npm.cmd run preparar
-```
+Se mudar a URL pública, atualize a URL canônica e os metadados no HTML, o contato VCF e a imagem **assets/qr.svg** com um novo QR. O compartilhamento lê a URL canônica. No cartão NFC, grave apenas essa URL HTTPS.
 
-O comando atualiza `index.html`, o QR, o contato `.vcf` e a frente vetorial do cartão. Não edite o HTML gerado diretamente: altere os dados em `js/perfil.js` ou a estrutura em `templates/index.html`.
+Alguns celulares baixam o VCF antes de abrir a importação na agenda. Compartilhamento nativo e cópia dependem do navegador; se indisponíveis, o site mostra um link selecionável. Teste em Android/iPhone antes da entrega.
 
-Em uma instalação nova, use Node.js 22+ e rode `npm.cmd ci` antes. A dependência qrcode é usada somente na preparação local; o site publicado não depende de Node.js nem de serviços externos para gerar o QR.
-
-## Serviços e valores
-
-O catálogo tem 12 opções fictícias autorizadas para demonstração. Edite a lista `servicos` em `js/perfil.js`:
-
-```js
-{ nome: 'Banho · porte pequeno', preco: 45, aPartirDe: true },
-{ nome: 'Corte de unhas', preco: 15 },
-{ nome: 'Serviço personalizado', preco: null }
-```
-
-Preço: número em reais, sem `R$`; use ponto nos centavos (`49.90`). `aPartirDe: true` mostra o prefixo. Preço vazio (`null` ou omitido) exibe “Sob consulta”. Cada serviço abre o WhatsApp com seu nome e valor, sem enviar a mensagem automaticamente.
-
-Depois de preencher nomes e preços reais, altere `servicosDemonstrativos` para `false` e execute `preparar`. Enquanto for `true`, o site e a mensagem identificam os valores como demonstrativos.
-
-## Publicação
-
-Envie somente **index.html**, **css/**, **js/** e **assets/** ao GitHub Pages, mantendo a estrutura. A URL configurada é https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/. Se mudar de endereço, atualize `urlPublica` e prepare novamente. QR e NFC devem apontar para essa URL HTTPS estável.
-
-O preparo local não publica automaticamente. Não envie node_modules, scripts, templates, tests ou arte-cartao para a pasta pública.
-
-## Contatos e imagens
-
-- WhatsApp/ligação: **(81) 98872-6029** (`+5581988726029`).
-- Instagram: **@clubdog.s**, https://www.instagram.com/clubdog.s/.
-- Cidade: Caruaru, PE. O mapa informado pelo usuário foi mantido; confirme o destino com o cliente. O endereço completo ainda não foi informado.
-- Logo: **assets/logo-club-dogs.jpg**, fornecida pelo usuário, preservada com recorte circular por CSS/SVG.
-- Capa: **assets/pets-club-dogs.jpg**, ilustração criada com image_gen, 960 × 640 px. Briefing: cão e gato amigáveis, cenário lilás/rosa, luz suave, espaço à esquerda, sem texto ou logo. Não é uma foto do estabelecimento.
-
-Salvar contato abre um vCard com o nome do estabelecimento. Alguns aparelhos baixam o arquivo antes da importação pelo aplicativo Contatos. Compartilhar usa a API nativa, depois cópia e, por fim, link selecionável.
-
-## Frente do cartão
-
-Somente **arte-cartao/club-dogs/frente.svg** e **frente.png** foram mantidos. O SVG é regenerado pelo comando `preparar`; o PNG é a prévia aprovada. Medida atual: 90 × 50 mm, sem sangria. Ajuste dimensões, fontes e acabamento com a gráfica antes de imprimir.
-
-## Validação e organização
-
-`npm.cmd test` executa os testes de geração, contato, links, compartilhamento e catálogo. Foram conferidos layout e navegação nas larguras de 320, 375, 390, 768 e 1280 px. O QR do site passou na decodificação. Testes em iPhone/Android físicos, importação na agenda e prévia real do WhatsApp continuam sendo verificações de entrega.
-
-Mantidos: arquivos publicados, dados, modelos e scripts de manutenção, testes úteis, dependências necessárias, frente aprovada, histórico Git e configuração do Live Server. Removidos: ferramentas temporárias de QA, capturas antigas, foto pessoal sem uso, documentos duplicados e código de funcionalidades descartadas.
+A logo foi fornecida pelo cliente. A capa é uma ilustração criada com image_gen, não uma foto do estabelecimento. A frente do cartão é de 90 × 50 mm, sem sangria; confirme a medida com a gráfica antes de imprimir.
