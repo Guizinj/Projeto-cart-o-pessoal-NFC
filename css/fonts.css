@@ -1,0 +1,16 @@
+/* Fontes locais do Google Fonts, licenciadas sob SIL OFL 1.1.
+   Licenças em assets/fonts/. */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 600 800;
+  font-display: swap;
+  src: url('../assets/fonts/nunito-latin.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/dm-sans-latin.woff2') format('woff2');
+}

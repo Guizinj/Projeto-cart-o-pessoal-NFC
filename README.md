@@ -1,23 +1,47 @@
 # Club Dog's
 
-Site estático, sem instalação, Node.js, npm ou preparação. Abra **index.html** no navegador. Para publicar, envie index.html, css/, js/ e assets/ ao GitHub Pages ou outra hospedagem estática com HTTPS.
+Site estático em HTML, CSS e JavaScript. Abra **index.html** diretamente no navegador. Não precisa instalar nada ou executar comandos. Para publicar com HTTPS, envie somente **index.html**, **css/**, **js/** e **assets/** ao GitHub Pages ou outra hospedagem estática.
 
-## Editar
+## Editar o catálogo
 
-- **index.html**: textos, contatos, links, serviços, preços, horários e metadados de compartilhamento. Tudo já está pronto para exibição.
-- **css/style.css**: aparência e responsividade.
-- **js/app.js**: compartilhamento e mensagens de agendamento. Não precisa editar ao trocar nomes ou preços.
-- **assets/**: logo, ilustração da capa, fotos reais, QR e contato da agenda.
-- **arte-cartao/club-dogs/**: frente aprovada e verso com logo, QR Code e NFC em SVG e PNG. O QR do verso abre a mesma URL pública do site.
+Todos os serviços e valores ficam no **index.html**, dentro da seção `services`. A estrutura é **categoria → porte → serviço**:
 
-Para mudar um serviço, altere seu título `<h3>` e o preço em `<strong>` no HTML. Mantenha ou retire o trecho `service-price-prefix` com “A partir de”, conforme necessário. Duplique ou remova um bloco `<li class="service-item">` para adicionar ou excluir opções. O JavaScript lê os dados visíveis e monta a mensagem do WhatsApp automaticamente.
+- `service-category`: Banho, Banho & Tosa ou Complementares; o nome fica em `category-name`.
+- `service-size`: cada porte; o nome fica em `size-name`.
+- `service-card`: cada serviço; edite `service-name`, o preço em `service-price strong` e a descrição em `service-description`, quando houver.
 
-Os serviços e preços ainda são fictícios. Após substituí-los pelos reais, remova o parágrafo `class="service-demo"`; isso retira a indicação de demonstração do site e das mensagens.
+Para incluir um serviço, duplique um bloco `<li class="service-card">` no porte correto. Para excluir, remova o bloco inteiro. Não invente limites de peso para os portes: eles devem ser confirmados com a equipe se forem necessários.
 
-Ao mudar o telefone, atualize os links de WhatsApp/ligação, o número visível e **assets/contato.vcf**. O link principal de agendamento define o número usado pelos serviços. Sem JavaScript, os links de serviços abrem a conversa sem mensagem preenchida.
+**Todos os preços de Banho & Tosa usam “A partir de”**: mantenha o trecho `service-price-prefix` nesses serviços. Banhos e complementares têm valores sem esse prefixo. A tosa com nós não é oferecida para porte grande; a progressiva desse porte está como **Sob consulta**.
 
-Se mudar a URL pública, atualize a URL canônica e os metadados no HTML, o contato VCF e a imagem **assets/qr.svg** e o QR incorporado em **arte-cartao/club-dogs/verso.svg**, atualizando também **verso.png**. O compartilhamento lê a URL canônica. No cartão NFC, grave apenas essa URL HTTPS.
+As mensagens do WhatsApp são montadas pelo **js/app.js** a partir da categoria, porte, nome e preço visíveis no HTML. O número vem do botão principal de agendamento no hero. Sem JavaScript, os blocos continuam expansíveis e os links abrem a conversa sem mensagem preenchida.
 
-Alguns celulares baixam o VCF antes de abrir a importação na agenda. Compartilhamento nativo e cópia dependem do navegador; se indisponíveis, o site mostra um link selecionável. Teste em Android/iPhone antes da entrega.
+## Fotos, contato e horários
 
-A logo e as duas fotos da seção “Quem passa por aqui” foram fornecidas pelo cliente. A capa é uma ilustração criada com image_gen, não uma foto do estabelecimento. Para trocar as fotos, substitua os arquivos ou atualize os caminhos, dimensões e textos alternativos no HTML. Os horários ficam na seção “Horários de funcionamento”, também no HTML. A frente e o verso do cartão são de 90 × 50 mm, sem sangria; confirme a medida com a gráfica antes de imprimir.
+A galeria `moments` é um carrossel manual. Para adicionar uma foto, copie a imagem para **assets/** e duplique um `<figure class="pet-photo">` dentro de `photo-track`. Atualize `src`, texto alternativo, dimensões originais e legenda. A contagem e as setas se ajustam à quantidade de fotos ao abrir a página; não precisa mudar o JavaScript. Não há reprodução automática. Sem JavaScript, é possível rolar a galeria manualmente.
+
+Os contatos continuam limitados a WhatsApp, Instagram, ligação e localização. Ao trocar o telefone, atualize os links, o número visível e **assets/contato.vcf**. O Instagram atual é **@clubdog.s**; telefone: **(81) 98872-6029**.
+
+Os horários ficam na seção `hours`: **terça a sexta, 08:00 às 18:30; sábado, 08:00 às 17:30; domingo e segunda, fechado**. Ao alterar um horário, mude tanto o texto visível quanto o atributo `datetime` correspondente.
+
+**css/style.css** controla aparência e responsividade. A seção `keep-card` contém apenas um título e o botão de salvar contato. Alguns celulares baixam o VCF antes de abrir a importação na agenda. O compartilhamento usa a URL canônica e oferece cópia ou link selecionável quando o navegador não disponibiliza o compartilhamento nativo.
+
+## Tipografia
+
+Títulos usam **Nunito** e textos, preços e botões usam **DM Sans**, com tamanhos ajustados para leitura no celular. As duas fontes variáveis WOFF2 estão em **assets/fonts/**, junto das licenças SIL Open Font License 1.1 de cada família. A declaração fica em **css/fonts.css** e a escala tipográfica em **css/style.css**. Não há carregamento de fontes por CDN; publique a pasta assets/fonts junto do restante do site. Os subconjuntos latinos incluem os caracteres acentuados usados em português.
+
+Fontes oficiais: [Nunito](https://fonts.google.com/specimen/Nunito) e [DM Sans](https://fonts.google.com/specimen/DM+Sans).
+
+## URL pública e cartão
+
+URL atual: **https://guizinj.github.io/Projeto-cart-o-pessoal-NFC/**. Se mudar, atualize a URL canônica e os metadados no HTML, o campo de cópia manual, o VCF, **assets/qr.svg** e o QR incorporado no verso do cartão, atualizando também seu PNG. No cartão NFC, grave apenas a URL HTTPS.
+
+As artes em SVG e PNG ficam em **arte-cartao/club-dogs/** e não foram alteradas nesta revisão. O cartão mede 90 × 50 mm, sem sangria; confirme as especificações com a gráfica. A logo e as fotos da galeria foram fornecidas pelo cliente. A capa é uma ilustração, não uma foto do estabelecimento.
+
+## Rollback e conferência
+
+O estado anterior a esta revisão, incluindo alterações manuais e histórico Git, foi salvo em **..\Projeto ClubeDogs - Rollbacks\2026-10-21-antes-do-novo-catalogo-67667e.zip**. Para restaurar, extraia o ZIP em uma pasta separada e use essa cópia como projeto. O backup fica fora da pasta pública do site.
+
+Validação desta revisão: as 41 opções foram conferidas por preço, porte e mensagem; navegação por teclado e áreas de toque verificadas; layouts em 320, 375, 390, 768 e 1280 px sem rolagem horizontal da página. Carrossel conferido com uma, duas e cinco fotos, assim como abertura direta do HTML, consulta sem JavaScript e alternativas de compartilhamento. Os destinos do WhatsApp foram interceptados localmente para conferir as mensagens sem enviar nada à equipe.
+
+Testes feitos em Chrome no computador. Safari/iPhone, Chrome/Android, abertura dos aplicativos e importação efetiva do VCF em aparelhos físicos ainda não foram realizados e devem ser conferidos antes da entrega.
