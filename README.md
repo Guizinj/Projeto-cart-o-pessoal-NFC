@@ -12,6 +12,8 @@ Todos os serviços e valores ficam no **index.html**, dentro da seção `service
 
 Para incluir um serviço, duplique um bloco `<li class="service-card">` no porte correto. Para excluir, remova o bloco inteiro. Não invente limites de peso para os portes: eles devem ser confirmados com a equipe se forem necessários.
 
+Em **Banhos**, o porte grande tem duas opções: **pelagem curta** e **pelagem longa**, cada uma com seus três valores. Pequeno e médio permanecem por porte, sem divisão de pelagem. Essa divisão não se aplica às outras categorias.
+
 **Todos os preços de Banho & Tosa usam “A partir de”**: mantenha o trecho `service-price-prefix` nesses serviços. Banhos e complementares têm valores sem esse prefixo. A tosa com nós não é oferecida para porte grande; a progressiva desse porte está como **Sob consulta**.
 
 As mensagens do WhatsApp são montadas pelo **js/app.js** a partir da categoria, porte, nome e preço visíveis no HTML. O número vem do botão principal de agendamento no hero. Sem JavaScript, os blocos continuam expansíveis e os links abrem a conversa sem mensagem preenchida.
@@ -42,6 +44,6 @@ As artes em SVG e PNG ficam em **arte-cartao/club-dogs/** e não foram alteradas
 
 O estado anterior a esta revisão, incluindo alterações manuais e histórico Git, foi salvo em **..\Projeto ClubeDogs - Rollbacks\2026-10-21-antes-do-novo-catalogo-67667e.zip**. Para restaurar, extraia o ZIP em uma pasta separada e use essa cópia como projeto. O backup fica fora da pasta pública do site.
 
-Validação desta revisão: as 41 opções foram conferidas por preço, porte e mensagem; navegação por teclado e áreas de toque verificadas; layouts em 320, 375, 390, 768 e 1280 px sem rolagem horizontal da página. Carrossel conferido com uma, duas e cinco fotos, assim como abertura direta do HTML, consulta sem JavaScript e alternativas de compartilhamento. Os destinos do WhatsApp foram interceptados localmente para conferir as mensagens sem enviar nada à equipe.
+Validação desta revisão: as 44 opções foram conferidas por preço, porte e mensagem; navegação por teclado e áreas de toque verificadas; layouts em 320, 375, 390, 768 e 1280 px sem rolagem horizontal da página. Carrossel conferido com uma, duas e cinco fotos, assim como abertura direta do HTML, consulta sem JavaScript e alternativas de compartilhamento. Os destinos do WhatsApp foram interceptados localmente para conferir as mensagens sem enviar nada à equipe.
 
 Testes feitos em Chrome no computador. Safari/iPhone, Chrome/Android, abertura dos aplicativos e importação efetiva do VCF em aparelhos físicos ainda não foram realizados e devem ser conferidos antes da entrega.

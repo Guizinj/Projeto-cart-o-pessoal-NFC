@@ -73,7 +73,7 @@ summary::-webkit-details-marker { display: none; }
 .service-size + .service-size { margin-top: 8px; }
 .size-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 13px 15px; border-radius: 11px; background: #f6f4fb; font-size: 14px; color: var(--ink);  line-height: 1.5; }
 .size-summary svg { width: 15px; height: 15px; color: var(--purple); }
-.size-action { display: flex; align-items: center; gap: 8px; color: var(--purple); font-size: 12px; }
+.size-action { display: flex; flex-shrink: 0; align-items: center; gap: 8px; color: var(--purple); font-size: 12px; }
 .service-size[open] > .size-summary .size-action > span { display: none; }
 .service-size[open] > .size-summary { background: #eeebfc; color: var(--purple); }
 .service-size[open] > .size-summary svg { transform: rotate(90deg); }
